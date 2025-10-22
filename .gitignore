@@ -98,7 +98,7 @@ tmp/
 temp/
 
 # Custom exclusions for your portfolio
-components/Projects.tsx
+
 components/Skills.tsx
 static/
 out/

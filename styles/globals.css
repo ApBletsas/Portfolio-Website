@@ -2,36 +2,112 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root {
+  --color-primary: #335c67;
+  --color-secondary: #E09F3E;
+  --color-accent: #9E2A2B;
+  --color-background: #FFFBF5;
+  --color-surface: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-yellow: #FFF3B0;
+  --color-crimson: #540B0E;
+  --color-text: #0f1417;
+}
+
+.dark {
+  --color-primary: #75a5ad;
+  --color-secondary: #F4B963;
+  --color-accent: #C14445;
+  --color-background: #121212;
+  --color-surface: #1f1f1f;
+  --color-card: #2a2a2a;
+  --color-yellow: #FFFBDB;
+  --color-crimson: #C14445;
+  --color-text: #FFFBF5;
+}
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  body {
+    @apply bg-[#FFFBF5] dark:bg-[#121212] text-[#0f1417] dark:text-[#FFFBF5] transition-colors duration-300;
   }
   
-  body {
-    font-family: 'Inter', system-ui, sans-serif;
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-[#335c67] dark:text-[#FFF3B0] font-bold;
+  }
+  
+  a {
+    @apply text-[#335c67] dark:text-[#75a5ad] hover:text-[#E09F3E] dark:hover:text-[#F4B963] transition-colors duration-200;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
-  }
-  
-  .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 dark:bg-dark-700 dark:hover:bg-dark-600 text-gray-900 dark:text-gray-100 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
-  }
-  
-  .card {
-    @apply bg-white dark:bg-dark-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-dark-700;
-  }
-  
   .section-padding {
-    @apply py-16 px-4 sm:px-6 lg:px-8;
+    @apply py-20 px-4 md:px-8;
   }
-  
+
   .container-custom {
     @apply max-w-7xl mx-auto;
+  }
+
+  .card {
+    @apply bg-white dark:bg-[#2a2a2a] rounded-xl shadow-lg p-6 transition-all duration-300 border-2 border-[#E09F3E]/20 dark:border-[#F4B963]/30;
+  }
+
+  .card:hover {
+    @apply shadow-2xl border-[#E09F3E] dark:border-[#F4B963] transform scale-[1.02];
+  }
+
+  .card-primary {
+    @apply bg-gradient-to-br from-white to-[#e8f0f1] dark:from-[#2a2a2a] dark:to-[#335c67]/30 rounded-xl shadow-lg p-6 transition-all duration-300 border-2 border-[#335c67]/30 dark:border-[#75a5ad]/40;
+  }
+
+  .card-primary:hover {
+    @apply shadow-2xl border-[#335c67] dark:border-[#75a5ad];
+  }
+
+  .card-accent {
+    @apply bg-gradient-to-br from-white to-[#FFF3B0]/20 dark:from-[#2a2a2a] dark:to-[#E09F3E]/20 rounded-xl shadow-lg p-6 transition-all duration-300 border-2 border-[#E09F3E]/30 dark:border-[#F4B963]/40;
+  }
+
+  .card-accent:hover {
+    @apply shadow-2xl border-[#E09F3E] dark:border-[#F4B963];
+  }
+
+  .btn-primary {
+    @apply bg-[#335c67] hover:bg-[#2a4a53] dark:bg-[#75a5ad] dark:hover:bg-[#478791] text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-[#E09F3E] hover:bg-[#c78a35] dark:bg-[#F4B963] dark:hover:bg-[#E09F3E] text-white dark:text-[#0f1417] px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+
+  .btn-accent {
+    @apply bg-[#9E2A2B] hover:bg-[#540B0E] dark:bg-[#C14445] dark:hover:bg-[#9E2A2B] text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-[#335c67] via-[#E09F3E] to-[#9E2A2B] dark:from-[#75a5ad] dark:via-[#F4B963] dark:to-[#C14445] bg-clip-text text-transparent;
+  }
+  
+  .bg-gradient-primary {
+    @apply bg-gradient-to-br from-[#335c67] to-[#2a4a53] dark:from-[#75a5ad] dark:to-[#478791];
+  }
+  
+  .bg-gradient-accent {
+    @apply bg-gradient-to-br from-[#E09F3E] to-[#9E2A2B] dark:from-[#F4B963] dark:to-[#C14445];
+  }
+}
+
+@layer utilities {
+  .accent-border {
+    @apply border-2 border-[#E09F3E] dark:border-[#F4B963];
+  }
+  
+  .highlight-text {
+    @apply text-[#9E2A2B] dark:text-[#F4B963] font-semibold;
+  }
+  
+  .section-alt {
+    @apply bg-[#F8F8F8] dark:bg-[#1a1a1a];
   }
 }
