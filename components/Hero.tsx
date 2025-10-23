@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaReact, FaPython, FaDocker, FaGitAlt, FaDatabase, FaHtml5, FaCss3Alt, FaJs } from 'react-icons/fa'
+import { SiMysql } from 'react-icons/si'
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -18,6 +19,18 @@ const Hero = () => {
     link.download = 'Apostolos_Bletsas_Resume.pdf'
     link.click()
   }
+
+  // Floating tech icons configuration - evenly spaced
+  const techIcons = [
+    { Icon: FaReact, color: '#61DAFB', size: 'w-12 h-12' },
+    { Icon: FaPython, color: '#3776AB', size: 'w-14 h-14' },
+    { Icon: FaDocker, color: '#2496ED', size: 'w-12 h-12' },
+    { Icon: SiMysql, color: '#4479A1', size: 'w-12 h-12' },
+    { Icon: FaGitAlt, color: '#F05032', size: 'w-14 h-14' },
+    { Icon: FaHtml5, color: '#E34F26', size: 'w-12 h-12' },
+    { Icon: FaCss3Alt, color: '#1572B6', size: 'w-12 h-12' },
+    { Icon: FaJs, color: '#F7DF1E', size: 'w-14 h-14' },
+  ]
 
   return (
     <section className="min-h-screen flex items-center justify-center section-padding bg-gradient-to-br from-gray-50 to-gray-100 dark:from-dark-900 dark:to-dark-800">
@@ -36,7 +49,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6"
             >
-                        Hello there! <br /> I&apos;m{' '}
+              Hello there! <br /> I&apos;m{' '}
               <span className="text-primary-600 dark:text-primary-400">
                 Apostolos Bletsas
               </span>
@@ -141,48 +154,77 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="relative">
+            <div className="relative w-80 h-80" style={{ transform: 'translate(-20px, -20px)' }}>
               {/* Profile Image Placeholder */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="w-80 h-80 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center shadow-2xl"
+                className="w-full h-full bg-gradient-to-br from-[#335c67] to-[#2a4a53] dark:from-[#75a5ad] dark:to-[#478791] rounded-full flex items-center justify-center shadow-2xl"
               >
                 <div className="text-white text-6xl font-bold">
                   AB
                 </div>
               </motion.div>
               
-              {/* Floating Elements */}
-              <motion.div
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [0, 5, 0]
-                }}
-                transition={{ 
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-primary-500 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg"
-              >
-                💻
-              </motion.div>
-              
-              <motion.div
-                animate={{ 
-                  y: [0, 10, 0],
-                  rotate: [0, -5, 0]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-                className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary-400 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg"
-              >
-                ⚡
-              </motion.div>
+              {/* Orbiting Tech Icons */}
+              {techIcons.map(({ Icon, color, size }, index) => {
+                const radius = 185 // Distance from center
+                const orbitDuration = 60 // Rotation Speed in seconds
+                const totalIcons = techIcons.length
+                const angleSpacing = 360 / totalIcons // Equal spacing between icons
+                const startAngle = index * angleSpacing // Starting angle for this icon
+                
+                // Calculate the full circle path
+                const pathPoints = Array.from({ length: 360 }, (_, i) => {
+                  const currentAngle = (startAngle + i) * (Math.PI / 180)
+                  return {
+                    x: Math.cos(currentAngle) * radius,
+                    y: Math.sin(currentAngle) * radius,
+                  }
+                })
+                
+                return (
+                  <motion.div
+                    key={index}
+                    className={`absolute ${size} rounded-lg bg-white dark:bg-[#2a2a2a] shadow-lg flex items-center justify-center border-2 border-[#E09F3E]/30 dark:border-[#F4B963]/30`}
+                    style={{
+                      left: '50%',
+                      top: '50%',
+                      marginLeft: `-${parseInt(size.split('-')[1]) / 2}px`,
+                      marginTop: `-${parseInt(size.split('-')[1]) / 2}px`,
+                    }}
+                    animate={{
+                      // Perfect circular orbital motion
+                      x: pathPoints.map(p => p.x),
+                      y: pathPoints.map(p => p.y),
+                      // Pulse effect
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      x: {
+                        duration: orbitDuration,
+                        repeat: Infinity,
+                        ease: "linear",
+                      },
+                      y: {
+                        duration: orbitDuration,
+                        repeat: Infinity,
+                        ease: "linear",
+                      },
+                      scale: {
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.2,
+                      },
+                    }}
+                  >
+                    <Icon 
+                      className="w-full h-full p-2" 
+                      style={{ color: color }}
+                    />
+                  </motion.div>
+                )
+              })}
             </div>
           </motion.div>
         </div>
