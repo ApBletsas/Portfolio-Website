@@ -14,8 +14,9 @@ const Hero = () => {
   }
 
   const downloadResume = () => {
+    // Use the base path for GitHub Pages
     const link = document.createElement('a')
-    link.href = '/Apostolos_Bletsas_CV.pdf' 
+    link.href = `${process.env.NODE_ENV === 'production' ? '/Portfolio-Website' : ''}/Apostolos_Bletsas_CV.pdf`
     link.download = 'Apostolos_Bletsas_CV.pdf'
     link.click()
   }
@@ -154,83 +155,76 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="relative w-80 h-80" style={{ transform: 'translate(-20px, -20px)' }}>
-              {/* Profile Image */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="w-full h-full rounded-full overflow-hidden shadow-2xl border-4 border-[#335c67] dark:border-[#75a5ad]"
-              >
-                <Image
-                  src="/profile.jpg" 
-                  alt="Apostolos Bletsas"
-                  width={320}
-                  height={320}
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </motion.div>
-              
-              {/* Orbiting Tech Icons */}
-              {techIcons.map(({ Icon, color, size }, index) => {
-                const radius = 180 // Equal distance from center for all icons
-                const orbitDuration = 60 // Rotation Speed in seconds
-                const totalIcons = techIcons.length
-                const angleSpacing = 360 / totalIcons // Equal spacing between icons
-                const startAngle = index * angleSpacing // Starting angle for this icon
-                
-                // Calculate the full circle path
-                const pathPoints = Array.from({ length: 360 }, (_, i) => {
-                  const currentAngle = (startAngle + i) * (Math.PI / 180)
-                  return {
-                    x: Math.cos(currentAngle) * radius,
-                    y: Math.sin(currentAngle) * radius,
-                  }
-                })
-                
-                return (
-                  <motion.div
-                    key={index}
-                    className={`absolute ${size} rounded-lg bg-white dark:bg-[#2a2a2a] shadow-lg flex items-center justify-center border-2 border-[#E09F3E]/30 dark:border-[#F4B963]/30`}
-                    style={{
-                      left: '50%',
-                      top: '50%',
-                      marginLeft: `-24px`, // Half of w-12 (48px / 2)
-                      marginTop: `-24px`,
-                    }}
-                    animate={{
-                      // Perfect circular orbital motion
-                      x: pathPoints.map(p => p.x),
-                      y: pathPoints.map(p => p.y),
-                      // Pulse effect
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      x: {
-                        duration: orbitDuration,
-                        repeat: Infinity,
-                        ease: "linear",
-                      },
-                      y: {
-                        duration: orbitDuration,
-                        repeat: Infinity,
-                        ease: "linear",
-                      },
-                      scale: {
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.2,
-                      },
-                    }}
-                  >
-                    <Icon 
-                      className="w-full h-full p-2" 
-                      style={{ color: color }}
-                    />
-                  </motion.div>
-                )
-              })}
+            <div className="relative z-10 w-full aspect-square rounded-full overflow-hidden shadow-2xl">
+              <Image
+                src="/profile.jpg"
+                alt="Apostolos Bletsas"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
+            
+            {/* Orbiting Tech Icons */}
+            {techIcons.map(({ Icon, color, size }, index) => {
+              const radius = 180 // Equal distance from center for all icons
+              const orbitDuration = 60 // Rotation Speed in seconds
+              const totalIcons = techIcons.length
+              const angleSpacing = 360 / totalIcons // Equal spacing between icons
+              const startAngle = index * angleSpacing // Starting angle for this icon
+              
+              // Calculate the full circle path
+              const pathPoints = Array.from({ length: 360 }, (_, i) => {
+                const currentAngle = (startAngle + i) * (Math.PI / 180)
+                return {
+                  x: Math.cos(currentAngle) * radius,
+                  y: Math.sin(currentAngle) * radius,
+                }
+              })
+              
+              return (
+                <motion.div
+                  key={index}
+                  className={`absolute ${size} rounded-lg bg-white dark:bg-[#2a2a2a] shadow-lg flex items-center justify-center border-2 border-[#E09F3E]/30 dark:border-[#F4B963]/30`}
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    marginLeft: `-24px`, // Half of w-12 (48px / 2)
+                    marginTop: `-24px`,
+                  }}
+                  animate={{
+                    // Perfect circular orbital motion
+                    x: pathPoints.map(p => p.x),
+                    y: pathPoints.map(p => p.y),
+                    // Pulse effect
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    x: {
+                      duration: orbitDuration,
+                      repeat: Infinity,
+                      ease: "linear",
+                    },
+                    y: {
+                      duration: orbitDuration,
+                      repeat: Infinity,
+                      ease: "linear",
+                    },
+                    scale: {
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.2,
+                    },
+                  }}
+                >
+                  <Icon 
+                    className="w-full h-full p-2" 
+                    style={{ color: color }}
+                  />
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </div>
