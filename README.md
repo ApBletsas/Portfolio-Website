@@ -2,6 +2,10 @@
 
 A modern, responsive portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. Features smooth animations, dark mode support, and a clean, professional design.
 
+## Link
+
+You can find it here: https://apbletsas.github.io/Portfolio-Website/
+
 ## Features
 
 - Modern and clean design with smooth animations
@@ -48,22 +52,6 @@ Portfolio-Website/
 ├── tailwind.config.ts    # Tailwind configuration
 └── tsconfig.json         # TypeScript configuration
 ```
-
-
-
-## Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import your repository on Vercel
-3. Deploy automatically
-
-### Other Options
-
-- Netlify
-- GitHub Pages
-- AWS Amplify
 
 ## Available Scripts
 
