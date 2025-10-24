@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  trailingSlash: true,
+  basePath: '/portfolio',
   images: {
-    unoptimized: true
-  }
+    unoptimized: true,
+  },
 }
 
 module.exports = nextConfig
