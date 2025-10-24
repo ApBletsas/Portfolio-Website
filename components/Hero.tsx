@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaReact, FaPython, FaDocker, FaGitAlt, FaDatabase, FaHtml5, FaCss3Alt, FaJs } from 'react-icons/fa'
 import { SiMysql } from 'react-icons/si'
-import Image from 'next/image'
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -15,7 +14,8 @@ const Hero = () => {
 
   const downloadResume = () => {
     const link = document.createElement('a')
-    link.href = '/Apostolos_Bletsas_CV.pdf' 
+    // Use base path for GitHub Pages
+    link.href = `${process.env.NODE_ENV === 'production' ? '/Portfolio-Website' : ''}/Apostolos_Bletsas_CV.pdf`
     link.download = 'Apostolos_Bletsas_CV.pdf'
     link.click()
   }
@@ -160,13 +160,10 @@ const Hero = () => {
                 whileHover={{ scale: 1.05 }}
                 className="w-full h-full rounded-full overflow-hidden shadow-2xl border-4 border-[#335c67] dark:border-[#75a5ad]"
               >
-                <Image
-                  src="/profile.jpg" // You'll need to add your photo to public folder
+                <img
+                  src={`${process.env.NODE_ENV === 'production' ? '/Portfolio-Website' : ''}/profile.jpg`}
                   alt="Apostolos Bletsas"
-                  width={320}
-                  height={320}
                   className="w-full h-full object-cover"
-                  priority
                 />
               </motion.div>
               
