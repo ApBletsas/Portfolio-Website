@@ -98,6 +98,5 @@ tmp/
 temp/
 
 # Custom exclusions for your portfolio
-components/Skills.tsx
 static/
 out/

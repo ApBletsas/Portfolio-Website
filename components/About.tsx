@@ -9,9 +9,9 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const stats = [
-    { number: '💻', label: '' },
+    { number: 'English', label: 'C2' },
     { number: 'BSc', label: 'Computer Science' },
-    { number: '2', label: 'Languages Spoken' },
+    { number: 'Greek', label: 'Native' },
     { number: '5+', label: 'Certifications Earned' },
   ]
 

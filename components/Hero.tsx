@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaReact, FaPython, FaDocker, FaGitAlt, FaDatabase, FaHtml5, FaCss3Alt, FaJs } from 'react-icons/fa'
 import { SiMysql } from 'react-icons/si'
+import Image from 'next/image'
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -13,23 +14,22 @@ const Hero = () => {
   }
 
   const downloadResume = () => {
-    // In a real implementation, this would download the actual resume file
     const link = document.createElement('a')
-    link.href = '/resume.pdf' // You would need to add this file to the public folder
-    link.download = 'Apostolos_Bletsas_Resume.pdf'
+    link.href = '/Apostolos_Bletsas_CV.pdf' 
+    link.download = 'Apostolos_Bletsas_CV.pdf'
     link.click()
   }
 
   // Floating tech icons configuration - evenly spaced
   const techIcons = [
     { Icon: FaReact, color: '#61DAFB', size: 'w-12 h-12' },
-    { Icon: FaPython, color: '#3776AB', size: 'w-14 h-14' },
+    { Icon: FaPython, color: '#3776AB', size: 'w-12 h-12' },
     { Icon: FaDocker, color: '#2496ED', size: 'w-12 h-12' },
     { Icon: SiMysql, color: '#4479A1', size: 'w-12 h-12' },
-    { Icon: FaGitAlt, color: '#F05032', size: 'w-14 h-14' },
+    { Icon: FaGitAlt, color: '#F05032', size: 'w-12 h-12' },
     { Icon: FaHtml5, color: '#E34F26', size: 'w-12 h-12' },
     { Icon: FaCss3Alt, color: '#1572B6', size: 'w-12 h-12' },
-    { Icon: FaJs, color: '#F7DF1E', size: 'w-14 h-14' },
+    { Icon: FaJs, color: '#F7DF1E', size: 'w-12 h-12' },
   ]
 
   return (
@@ -61,7 +61,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8"
             >
-              AI & Software Developer
+            Software Developer
             </motion.h2>
             
             <motion.p
@@ -117,7 +117,7 @@ const Hero = () => {
                 href="https://github.com/ApBletsas"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+                className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-200"
                 aria-label="GitHub"
               >
                 <FaGithub className="w-6 h-6" />
@@ -129,7 +129,7 @@ const Hero = () => {
                 href="https://www.linkedin.com/in/apostolis-bletsas"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors duration-200"
                 aria-label="LinkedIn"
               >
                 <FaLinkedin className="w-6 h-6" />
@@ -139,7 +139,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.2, y: -2 }}
                 whileTap={{ scale: 0.9 }}
                 href="mailto:apostolisbletsas14@gmail.com"
-                className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+                className="text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-500 transition-colors duration-200"
                 aria-label="Email"
               >
                 <FaEnvelope className="w-6 h-6" />
@@ -155,19 +155,24 @@ const Hero = () => {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative w-80 h-80" style={{ transform: 'translate(-20px, -20px)' }}>
-              {/* Profile Image Placeholder */}
+              {/* Profile Image */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="w-full h-full bg-gradient-to-br from-[#335c67] to-[#2a4a53] dark:from-[#75a5ad] dark:to-[#478791] rounded-full flex items-center justify-center shadow-2xl"
+                className="w-full h-full rounded-full overflow-hidden shadow-2xl border-4 border-[#335c67] dark:border-[#75a5ad]"
               >
-                <div className="text-white text-6xl font-bold">
-                  AB
-                </div>
+                <Image
+                  src="/profile.jpg" 
+                  alt="Apostolos Bletsas"
+                  width={320}
+                  height={320}
+                  className="w-full h-full object-cover"
+                  priority
+                />
               </motion.div>
               
               {/* Orbiting Tech Icons */}
               {techIcons.map(({ Icon, color, size }, index) => {
-                const radius = 185 // Distance from center
+                const radius = 180 // Equal distance from center for all icons
                 const orbitDuration = 60 // Rotation Speed in seconds
                 const totalIcons = techIcons.length
                 const angleSpacing = 360 / totalIcons // Equal spacing between icons
@@ -189,8 +194,8 @@ const Hero = () => {
                     style={{
                       left: '50%',
                       top: '50%',
-                      marginLeft: `-${parseInt(size.split('-')[1]) / 2}px`,
-                      marginTop: `-${parseInt(size.split('-')[1]) / 2}px`,
+                      marginLeft: `-24px`, // Half of w-12 (48px / 2)
+                      marginTop: `-24px`,
                     }}
                     animate={{
                       // Perfect circular orbital motion

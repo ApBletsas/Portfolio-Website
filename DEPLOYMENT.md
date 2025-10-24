@@ -37,10 +37,6 @@ The static version is located in the `/static` folder and can be deployed direct
 │   └── index.tsx       # Home page
 ├── styles/             # Global styles
 │   └── globals.css     # Tailwind CSS imports
-├── static/             # Static HTML version
-│   ├── index.html      # Main HTML file
-│   ├── styles.css      # All CSS styles
-│   └── script.js       # JavaScript functionality
 └── public/             # Static assets
 ```
 
